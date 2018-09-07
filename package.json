@@ -1,0 +1,26 @@
+{
+  "name": "learn-gameai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch:src": "babel src --source-maps --out-dir dist --watch",
+    "watch:dist": "nodemon --watch dist dist/index.js",
+    "build": "babel src --source-maps --out-dir dist",
+    "start": "concurrently npm:watch:src npm:watch:dist"
+  },
+  "author": "Jason Rowland",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@babel/cli": "^7.0.0",
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "concurrently": "^4.0.1",
+    "nodemon": "^1.18.4"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.9",
+    "uuid": "^3.3.2"
+  }
+}

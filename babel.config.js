@@ -1,0 +1,13 @@
+module.exports =  {
+  plugins: [
+    ["transform-class-properties", { "spec": true }],
+  ],
+  presets: [
+    ["@babel/env", { 
+      targets: {
+        node: "current",
+      },
+      useBuiltIns: "usage"
+    }],
+  ],
+};
