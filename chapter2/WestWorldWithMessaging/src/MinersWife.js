@@ -10,4 +10,7 @@ class MinersWife extends Entity {
   }
 }
 
-export default MinersWife;
+export {
+  MinersWife as default,
+  MinersWife
+}

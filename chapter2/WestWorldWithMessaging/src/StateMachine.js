@@ -1,3 +1,6 @@
+import { assert } from 'chai';
+
+
 class StateMachine {
   owner = null;
   currentState = null;
@@ -9,21 +12,16 @@ class StateMachine {
   }
 
   setCurrentState(state) {
-    if (!state) {
-      throw new Error('State can not be null');
-    }
+    assert(state, 'state must be defined');
     this.currentState = state;
   }
   setGlobalState(state) {
-    if (!state) {
-      throw new Error('State can not be null');
-    }
+    assert(state, 'state must be defined');
     this.globalState = state;
   }
+
   setPreviousState(state) {
-    if (!state) {
-      throw new Error('State can not be null');
-    }
+    assert(state, 'state must be defined');
     this.previousState = state;
   }
 
@@ -46,15 +44,38 @@ class StateMachine {
   }
 
   revertToPreviousState() {
+    assert(this.previousState);
     this.changeState(this.previousState);
   }
 
   //returns true if the current state's type is equal to the type of the
   //class passed as a parameter. 
   isInState(state) {
-    return (state.constructor.name === this.currentState.constructor.name);
+    assert(state.constructor);
+    return (state.constructor === this.currentState.constructor);
+  }
+
+  handleMessage(telegram) {
+    assert(telegram);
+
+    //first see if the current state is valid and that it can handle
+    //the message
+    if (this.currentState && this.currentState.onMessage(this.owner, telegram)) {
+      return true;
+    }
+    
+    //if not, and if a global state has been implemented, send 
+    //the message to the global state
+    if (this.globalState && this.globalState.onMessage(this.owner, telegram)) {
+      return true;
+    }
+
+    return false;
   }
 
 }
 
-export default StateMachine;
+export {
+  StateMachine as default,
+  StateMachine
+}

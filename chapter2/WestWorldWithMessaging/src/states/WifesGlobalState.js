@@ -1,5 +1,7 @@
-import State from './State.js';
+import State from '../State.js';
 import VisitBathroom from './VisitBathroom.js';
+import MessageTypes from '../MessageTypes.js';
+import CookStew from '../states/CookStew.js';
 
 
 class WifesGlobalState extends State {
@@ -8,6 +10,16 @@ class WifesGlobalState extends State {
     if (Math.random() < 0.1) {
       obj.stateMachine.changeState(VisitBathroom);
     }
+  }
+  onMessage(obj, msg) {
+    switch (msg.msg) {
+      case MessageTypes.HI_HONEY_IM_HOME:
+        console.log(`${obj.constructor.name}: Hi honey. Let me make you some of mah fine country stew`);
+        obj.stateMachine.changeState(CookStew);
+        break;
+    }
+
+    return true;
   }
 }
 const state = new WifesGlobalState();

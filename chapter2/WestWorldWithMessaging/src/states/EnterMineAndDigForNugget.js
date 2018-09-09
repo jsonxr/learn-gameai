@@ -1,4 +1,4 @@
-import State from './State.js';
+import State from '../State.js';
 import Locations from '../Locations.js';
 import QuenchThirst from './QuenchThirst.js';
 import VisitBankAndDepositGold from './VisitBankAndDepositGold.js';

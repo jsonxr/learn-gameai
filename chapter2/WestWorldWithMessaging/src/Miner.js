@@ -14,7 +14,6 @@ class Miner extends Entity {
   constructor() {
     super();
     this.stateMachine.setCurrentState(GoHomeAndSleepTilRested);
-    console.log(this.stateMachine);
   }
 
   buyAndDrinkAWhiskey() {
@@ -36,4 +35,7 @@ class Miner extends Entity {
   }
 }
 
-export default Miner;
+export {
+  Miner as default,
+  Miner
+}

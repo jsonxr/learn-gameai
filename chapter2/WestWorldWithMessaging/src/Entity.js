@@ -1,17 +1,17 @@
 import uuid from 'uuid/v4';
-import StateMachine from './states/StateMachine.js';
+import StateMachine from './StateMachine.js';
 
 
 class Entity {
   id = uuid();
-  stateMachine = null;
-
-  constructor() {
-    this.stateMachine = new StateMachine(this);
-  }
+  stateMachine = new StateMachine(this);
 
   update() {
     this.stateMachine.update();
+  }
+
+  handleMessage(telegram) {
+    return this.stateMachine.handleMessage(telegram);
   }
 }
 

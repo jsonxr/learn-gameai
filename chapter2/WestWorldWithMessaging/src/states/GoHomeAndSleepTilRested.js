@@ -1,6 +1,9 @@
-import State from './State.js';
+import State from '../State.js';
 import Locations from '../Locations.js';
 import EnterMineAndDigForNugget from './EnterMineAndDigForNugget.js';
+import dispatcher from '../messaging/MessageDispatcher.js';
+import MessageTypes from '../MessageTypes.js';
+import EatStew from '../states/EatStew.js';
 
 
 class GoHomeAndSleepTilRested extends State {
@@ -8,6 +11,7 @@ class GoHomeAndSleepTilRested extends State {
     if (obj.location !== Locations.SHACK) {
       console.log(`${obj.constructor.name}: Walkin' home`);
       obj.location = Locations.SHACK;
+      dispatcher.dispatchMessage(0, obj, obj.wife, MessageTypes.HI_HONEY_IM_HOME);
     }
   }
 
@@ -24,6 +28,17 @@ class GoHomeAndSleepTilRested extends State {
 
   exit(obj) {
     console.log(`${obj.constructor.name}: Leaving the house`);
+  }
+
+  onMessage(obj, msg) {
+    switch(msg.msg) {
+      case MessageTypes.STEW_READY:
+        console.log(`${obj.constructor.name}: Okay hun, ahm a-comin'!`);
+        obj.stateMachine.changeState(EatStew);
+        return true;
+    }
+
+    return false;
   }
 }
 const state = new GoHomeAndSleepTilRested();

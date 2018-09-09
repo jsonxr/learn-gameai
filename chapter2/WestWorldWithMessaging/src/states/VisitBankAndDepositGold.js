@@ -1,4 +1,4 @@
-import State from './State.js';
+import State from '../State.js';
 import Locations from '../Locations.js';
 import GoHomeAndSleepTilRested from './GoHomeAndSleepTilRested.js';
 import EnterMineAndDigForNugget from './EnterMineAndDigForNugget.js';
